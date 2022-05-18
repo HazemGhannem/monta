@@ -1,0 +1,46 @@
+<div class="table-responsive">
+    <table class="table mb-0">
+        <thead>
+        <tr>
+            <th scope="row">ID</th>
+            <th scope="row">Prenom</th>
+            <th scope="row">Nom</th>
+            <th scope="row">Vol</th>
+            <th scope="row">Ville Arrivé</th>
+            <th scope="row">Date</th>
+            <th scope="row">Prix</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for resvol in resvol %}
+            <tr>
+                <td>
+                    {{ resvol.id }}
+                </td>
+                <td>
+                    {{ resvol.prenom }}
+                </td>
+                <td>
+                    {{ resvol.nom }}
+                </td>
+                <td>
+                    {{ resvol.villedep }}
+                </td>
+                <td>
+                    {{ resvol.villearr }}
+                </td>
+                <td>
+                    {{ resvol.getDatevoll()|date('d-m-Y H:i:s') }}
+                </td>
+
+                <td>
+                    {{ resvol.prixvol }}
+                </td>
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>

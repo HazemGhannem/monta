@@ -1,0 +1,57 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Hello HotelController!{% endblock %}
+
+{% block body %}
+    <section id="hotels" class="section-with-bg">
+
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Hotels</h2>
+                <p> Recherchez des offres sur des hôtels, des hébergements indépendants et plus encore </p>
+            </div>
+
+
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+
+
+                {% for i in tablehotels %}
+                <div class="col-lg-4 col-md-6" >
+                    <div class="hotel">
+                        <div class="hotel-img"  >
+                            <img   src="{{ asset('/back/img/')}}{{ i.imghotel }}"  alt="Hotel 1" class="img-fluid"   />
+                        </div>
+                        <h3><a href="#"> {{ i.nom }}</a></h3>
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p>{{ i.ville  }}</p>
+                        <a class="btn btn-outline-dark mt-auto" href="{{ path('get_hotel_info', {id:i.id}) }}">Ouvrir</a>
+        <a href="{{ path('pdf',{'id': i.id}) }}">   <img   width="30" src="https://cdn-icons-png.flaticon.com/512/337/337946.png">  </a>
+
+                    </div>
+
+                </div>
+                {% endfor %}
+
+
+
+
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+{% endblock %}

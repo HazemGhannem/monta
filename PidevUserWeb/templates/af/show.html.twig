@@ -1,0 +1,380 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ asset('uploads/') ~article.image }}" class="d-block w-100" width="75%" alt="...">
+            </div>
+        </div>
+    </div>
+    <section id="schedule" class="section-with-bg">
+        <div class="container wow fadeInUp">
+            <div class="section-header">
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.creationDate  |date("m/d/Y") }}</p>
+            </div>
+
+
+            <h3 class="sub-heading">{{ article.contenu }}</h3>
+
+            <!-- Like container -->
+            <div class="col-md-12 mt-5">
+                <div class="text-dark mt-3 row">
+                    <!-- adf session -->
+                    {% set idBlogueur = 2 %}
+
+                    {% set nbLikes = 0 %}
+                    {% set nbDislikes = 0 %}
+                    {% set hasLike = false %}
+                    {% set hasDislike = false %}
+
+                    {% for like in article.likes %}
+                        {% if like.typelike == 1 %}
+                            {% set nbLikes = nbLikes + 1 %}
+                            {% if like.blogueur.id == idBlogueur %}
+                                {% set hasLike = true %}
+                            {% endif %}
+                        {% else %}
+                            {% set nbDislikes = nbDislikes + 1 %}
+                            {% if like.blogueur.id == idBlogueur %}
+                                {% set hasDislike = true %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    <a class="col-md-1" href="#"
+                       onclick="likeDislike(0,{{ article.id }});return false;">
+                        {% if hasDislike %}
+                            <button id="dislike-button-{{ article.id }}"
+                                    class="btn btn-dark p-2">
+                                <i id="dislike-button-heart-{{ article.id }}"
+                                   class="fa fa-thumbs-down"></i>
+                            </button>
+                        {% else %}
+                            <button id="dislike-button-{{ article.id }}"
+                                    class="btn btn-outline-dark p-2">
+                                <i id="dislike-button-heart-{{ article.id }}"
+                                   class="fa fa-thumbs-o-down"></i>
+                            </button>
+                        {% endif %}
+                    </a>
+                    <p id="nb-dislike-{{ article.id }}"
+                       class="col-md-1 my-auto text-center">{{ nbDislikes }}</p>
+                    <div class="col-md-8 m-auto progress-box">
+                        <div class="progress">
+                            <div id="like-bar-{{ article.id }}"
+                                 class="progress-bar progress-bar-striped position-relative bg-primary"
+                                 style="width:{{ article.pourcentageLike }}%">
+                            </div>
+                        </div>
+                    </div>
+                    <p id="nb-like-{{ article.id }}"
+                       class="col-md-1 my-auto text-center">{{ nbLikes }}</p>
+                    <a class="col-md-1 w-100" href="#"
+                       onclick="likeDislike(1,{{ article.id }});return false;">
+                        {% if hasLike %}
+                            <button id="like-button-{{ article.id }}"
+                                    class="btn btn-dark p-2">
+                                <i id="like-button-heart-{{ article.id }}"
+                                   class="fa fa-thumbs-up"></i>
+                            </button>
+                        {% else %}
+                            <button id="like-button-{{ article.id }}"
+                                    class="btn btn-dark-outline p-2">
+                                <i id="like-button-heart-{{ article.id }}"
+                                   class="fa fa-thumbs-o-up"></i>
+                            </button>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+            <!-- end like container -->
+
+            <div class="tab-content row justify-content-center">
+
+                <!-- Schdule Day 1 -->
+                <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
+                    <h4 class="my-3 font-weight-bold">Comments section :</h4>
+                    {% for o in article.opinions %}
+
+                        <div class="row shadow p-2 my-2 rounded border schedule-item">
+                            <div class="col-md-2">
+                                <time>{{ o.creationDate|date('Y-m-d  H:i:s') }}</time>
+                            </div>
+                            <div class="col-md-8">
+                                <h4>Author <span>{{ o.client }}</span></h4>
+                                <p>{{ o.commentaire }}</p>
+                            </div>
+                            <!-- adf session -->
+                            {% set idBlogeur = 1 %}
+                            {% set isSignaled = false %}
+
+                            {% for s in o.signalements %}
+                                {% if s.blogueur.id == idBlogueur %}
+                                    {% set isSignaled = true %}
+                                {% endif %}
+                            {% endfor %}
+                            <div class="col-md-2">
+                                {% if isSignaled %}
+                                    <a id="btn-signaler-{{ o.id }}" href="{{ asset('signalement/new/') ~o.id }}">Signaler</a>
+                                {% else %}
+                                    <p>Vous avez signalé ce commentaire</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <!--
+                    <form action="a_f_newOp" method="post" role="form" class="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Rating" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Add Comment"></textarea>
+                            <div class="validation"></div>
+                        </div>
+                        <div class="text-center"><button type="submit">Submit</button></div>
+                    </form>
+                    -->
+                </div>
+                <!-- End Schdule Day 1 -->
+
+                <!-- Schdule Day 2 -->
+                <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-2">
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>10:00 AM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/1.jpg" alt="Brenden Legros">
+                            </div>
+                            <h4>Libero corrupti explicabo itaque. <span>Brenden Legros</span></h4>
+                            <p>Facere provident incidunt quos voluptas.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>11:00 AM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/2.jpg" alt="Hubert Hirthe">
+                            </div>
+                            <h4>Et voluptatem iusto dicta nobis. <span>Hubert Hirthe</span></h4>
+                            <p>Maiores dignissimos neque qui cum accusantium ut sit sint inventore.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>12:00 AM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/3.jpg" alt="Cole Emmerich">
+                            </div>
+                            <h4>Explicabo et rerum quis et ut ea. <span>Cole Emmerich</span></h4>
+                            <p>Veniam accusantium laborum nihil eos eaque accusantium aspernatur.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>02:00 PM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/4.jpg" alt="Jack Christiansen">
+                            </div>
+                            <h4>Qui non qui vel amet culpa sequi. <span>Jack Christiansen</span></h4>
+                            <p>Nam ex distinctio voluptatem doloremque suscipit iusto.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>03:00 PM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/5.jpg" alt="Alejandrin Littel">
+                            </div>
+                            <h4>Quos ratione neque expedita asperiores. <span>Alejandrin Littel</span></h4>
+                            <p>Eligendi quo eveniet est nobis et ad temporibus odio quo.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>04:00 PM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/6.jpg" alt="Willow Trantow">
+                            </div>
+                            <h4>Quo qui praesentium nesciunt <span>Willow Trantow</span></h4>
+                            <p>Voluptatem et alias dolorum est aut sit enim neque veritatis.</p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Schdule Day 2 -->
+
+                <!-- Schdule Day 3 -->
+                <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-3">
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>10:00 AM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/2.jpg" alt="Hubert Hirthe">
+                            </div>
+                            <h4>Et voluptatem iusto dicta nobis. <span>Hubert Hirthe</span></h4>
+                            <p>Maiores dignissimos neque qui cum accusantium ut sit sint inventore.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>11:00 AM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/3.jpg" alt="Cole Emmerich">
+                            </div>
+                            <h4>Explicabo et rerum quis et ut ea. <span>Cole Emmerich</span></h4>
+                            <p>Veniam accusantium laborum nihil eos eaque accusantium aspernatur.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>12:00 AM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/1.jpg" alt="Brenden Legros">
+                            </div>
+                            <h4>Libero corrupti explicabo itaque. <span>Brenden Legros</span></h4>
+                            <p>Facere provident incidunt quos voluptas.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>02:00 PM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/4.jpg" alt="Jack Christiansen">
+                            </div>
+                            <h4>Qui non qui vel amet culpa sequi. <span>Jack Christiansen</span></h4>
+                            <p>Nam ex distinctio voluptatem doloremque suscipit iusto.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>03:00 PM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/5.jpg" alt="Alejandrin Littel">
+                            </div>
+                            <h4>Quos ratione neque expedita asperiores. <span>Alejandrin Littel</span></h4>
+                            <p>Eligendi quo eveniet est nobis et ad temporibus odio quo.</p>
+                        </div>
+                    </div>
+
+                    <div class="row schedule-item">
+                        <div class="col-md-2">
+                            <time>04:00 PM</time>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="speaker">
+                                <img src="img/speakers/6.jpg" alt="Willow Trantow">
+                            </div>
+                            <h4>Quo qui praesentium nesciunt <span>Willow Trantow</span></h4>
+                            <p>Voluptatem et alias dolorum est aut sit enim neque veritatis.</p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Schdule Day 2 -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script id="ajax-like-dislike">
+        function signaler(idOpinion) {
+            $.ajax({
+                type: 'GET',
+                url: '/opinion/signaler/opinion',
+                data: {
+                    'idOpinion': idOpinion
+                },
+                success: function (retour) {
+                    if (retour) {
+                        obj = JSON.parse(retour);
+                        $("#btn-signaler-" + obj.id).remove()
+                        alert("Signalé avec succes")
+                    }
+                },
+                error: function () {
+                    alert("Erreur");
+                }
+            });
+        }
+
+
+        function likeDislike(typeLike, idArticle) {
+            $.ajax({
+                type: 'GET',
+                url: '/like',
+                data: {
+                    'typeLike': typeLike,
+                    'idArticle': idArticle
+                },
+                success: function (retour) {
+                    obj = JSON.parse(retour);
+                    if (typeLike) {
+                        $("#nb-like-" + idArticle).empty().append(obj.nbLike);
+                        if (obj.haveLike) {
+                            $('#like-button-' + idArticle).attr('class', 'btn btn-outline-dark p-2');
+                            $('#like-button-heart-' + idArticle).attr('class', 'fa fa-thumbs-up');
+                        } else {
+                            $('#like-button-' + idArticle).attr('class', 'btn btn-dark p-2');
+                            $('#like-button-heart-' + idArticle).attr('class', 'fa fa-thumbs-up');
+                        }
+                    } else {
+                        $("#nb-dislike-" + idArticle).empty().append(obj.nbDislike);
+                        if (obj.haveDislike) {
+                            $('#dislike-button-' + idArticle).attr('class', 'btn btn-dark p-2');
+                            $('#dislike-button-heart-' + idArticle).attr('class', 'fa fa-thumbs-down');
+                        } else {
+                            $('#dislike-button-' + idArticle).attr('class', 'btn btn-outline-dark p-2');
+                            $('#dislike-button-heart-' + idArticle).attr('class', 'fa fa-thumbs-o-down');
+                        }
+                    }
+                    $("#like-bar-" + idArticle).attr('style', 'width:' + obj.pourcentage + '%');
+                },
+                error: function () {
+                    alert("Connectez vous d'abord");
+                }
+            });
+        }
+    </script>
+
+{% endblock %}

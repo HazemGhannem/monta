@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HotelController!{% endblock %}
+
+{% block body %}
+
+    <body>
+
+    {{ form_start(destination) }}
+    <h1>Ajouter des destinations</h1>
+    {{ form_errors(destination.ville_dep) }}
+    {{ form_label(destination.ville_dep,"Ville depart") }}
+    {{ form_widget(destination.ville_dep) }}
+    {{ form_errors(destination.ville_arr) }}
+    {{ form_label(destination.ville_arr,"Ville arrivée") }}
+    {{ form_widget(destination.ville_arr) }}
+    {{ form_end(destination) }}
+    {{ form_start(destination,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+    </body>
+
+{% endblock %}

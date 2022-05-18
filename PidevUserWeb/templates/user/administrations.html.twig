@@ -1,0 +1,68 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="main-panel">
+            <h1 style="color:cornflowerblue ">&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;Liste Des Users</h1>
+            <br>
+            <br>
+            <h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="-align-center" style="color: #0b3251" href="{{ asset('ajoutuser') }}">Ajouter Un Nouveau User
+                </a></h4>
+            <br>
+
+            <table class="table table-secondary" style="color: steelblue" border="2">
+                <tr>
+                    <td>ID</td>
+                    <td>nom</td>
+
+                    <td>Prénom</td>
+                    <td>Cin </td>
+                    <td>Password </td>
+                    <td>Actions </td>
+
+
+
+                </tr>
+                {% for user in users %}
+
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{  user.nom }}</td>
+                        <td>{{  user.prenom }}</td>
+                        <td>{{ user.cin}}</td>
+                        <td>{{ user.password}}</td>
+
+                        <td><a href="modifuser/{{ user.id }}">
+                                <input class="btn btn-primary " type="submit" value="Modifier"/>
+
+                                <a href="suppuser/{{ user.id }}">
+                                    <input class="btn btn-primary " type="submit" value="Supprimer"/>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </table>
+        </nav>
+    </div>
+
+{% endblock %}

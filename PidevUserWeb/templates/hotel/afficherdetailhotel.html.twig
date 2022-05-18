@@ -1,0 +1,60 @@
+{% extends 'front.html.twig' %}
+
+{% block body %}
+    <section id="speakers-details">
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <img src="{{ asset('/back/img/')}}{{ hotel.imghotel }}" alt="Speaker 1" class="img-fluid">
+                    <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=917&amp;height=400&amp;hl=en&amp;q={{ hotel.nom }}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="details">
+                        <h1>{{ hotel.getNom }}</h1>
+                        <div class="social">
+
+                        </div>
+
+                     <h2>Adress : {{ hotel.ville }}</h2>
+                        <h6>nombres de chambres : {{ hotel.nbchambre }} chambres</h6>
+
+
+                        {% for i in hotel.relation %}
+
+                    <h3>   Chambre : {{ i.type}}  </h3>
+                            <h6>Nombre de lits : {{ i.NbLits}}    </h6>
+                            <h6>Prix {{ i.Prix}} <pre>
+                                </pre>
+                                <h6> Etage :{{ i.Etage}}</h6>
+                                 {{ i.Vue}} </h6>
+
+
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

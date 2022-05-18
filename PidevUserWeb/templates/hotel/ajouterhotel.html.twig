@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Ajouter un Hotel</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div >
+                <div class="row">
+                    <div class="col-xl-6 align-content-center" >
+                        <br><br>
+                        <div class="form-group">
+                            {{ form_start(formulaire,{'attr': {'novalidate': 'novalidate'}} ) }}
+                            <div class="form-group">
+                                {{ form_widget(formulaire.nom  , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'nom'}} ) }}
+                                {{ form_errors(formulaire.nom ) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(formulaire.nbChambre, {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'nombres de chambres'}} ) }}
+                                {{ form_errors(formulaire.nbChambre ) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(formulaire.ville , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'ville'}} ) }}
+                                {{ form_errors(formulaire.ville) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(formulaire.imghotel , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'image Hotel'}} ) }}
+                                {{ form_errors(formulaire.imghotel) }}
+                            </div>
+
+                        </div>
+                        {{ form_end(formulaire) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

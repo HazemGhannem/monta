@@ -1,0 +1,11 @@
+{% extends 'front.html.twig' %}
+{% block body %}
+    <h1> Ajouter une Reservation Evennement </h1>
+
+    <div class="form-group mb-0">
+    <div class="checkbox checkbox-secondary">
+        {{ form(form) }}
+    </div>
+    <a class="btn btn-danger" href="{{ path('listres') }}"> Go to List </a>
+
+{% endblock %}

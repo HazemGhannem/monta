@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="main-panel">
+            <h1 style="color:cornflowerblue ">&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+                &nbsp;&nbsp;Liste Des Users</h1>
+            <br>
+            <br>
+            <h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="-align-center" style="color: #0b3251" href="{{ asset('ajoutuser') }}">Ajouter Un Nouveau
+                    User
+                </a></h4>
+            <br>
+            <p style="100px" > <input  id="myInput"  type="text" placeholder="search">
+            <table id="t"  class="table table-secondary" style="color: steelblue" border="2">
+                <tr>
+                    <td>ID</td>
+                    <td>nom</td>
+                    <td>Prénom</td>
+                    <td>Cin</td>
+                    <td>Email</td>
+                    <td>Sexe</td>
+                    <td>Role</td>
+                    <td>Statut</td>
+                    <td>Actions</td>
+                </tr>
+                <tbody>
+                <tbody id="myTable">
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.nom }}</td>
+                        <td>{{ user.prenom }}</td>
+                        <td>{{ user.cin }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.sexe }}</td>
+                        <td>{% for role in user.roles %}
+                                {{ role }}/
+                            {% endfor %}</td>
+                        <td> {% if user.enabled == 1 %} Actif
+                            {% else %}Bloquer {% endif %}</td>
+                        <td>
+                            <a href="modifuser/{{ user.id }}">
+                                <input class="btn btn-primary " type="submit" value="Modifier"/>
+                            </a>
+                            <a href="suppuser/{{ user.id }}">
+                                <input class="btn btn-danger " type="submit" value="Supprimer"/>
+                            </a>
+                            {% if user.enabled == 1 %} <a href="{{ path ('desactiver-user', {'id' : user.id})}}" class="btn btn-dark text-white" href="#">Bloquer</a>
+                            {% else %}<a href="{{ path ('activer-user', {'id' : user.id})}}" class="btn btn-success text-white" href="#">Débloquer</a> {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </tbody>
+                <tbody id="search">
+                </tbody>
+            </table>
+        </nav>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{% endblock %}

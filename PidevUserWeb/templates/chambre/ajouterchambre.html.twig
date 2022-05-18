@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Ajouter une Chambre</h1>
+
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div >
+                    <div class="row">
+                        <div class="col-xl-6 align-content-center" >
+                            <br><br>
+                            <div class="form-group">
+                                {{ form_start(formulaire,{'attr': {'novalidate': 'novalidate'}} ) }}
+                                <div class="form-group">
+                                    {{ form_label(formulaire.Type, 'type')  }}
+                                    {{ form_widget(formulaire.Type, {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'type'}} ) }}
+                                    {{ form_errors(formulaire.Type ) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formulaire.nbLits, 'nombres lits')  }}
+                                    {{ form_widget(formulaire.nbLits, {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'nombres de lits'}} ) }}
+                                    {{ form_errors(formulaire.nbLits ) }}
+                                </div>
+                                <div class="form-group">
+
+                                    {{ form_label(formulaire.etage, 'etage')  }}
+                                    {{ form_widget(formulaire.etage , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'etage'}} ) }}
+                                    {{ form_errors(formulaire.etage) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formulaire.prix, 'prix ')  }}
+                                    {{ form_widget(formulaire.prix , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'prix '}} ) }}
+                                    {{ form_errors(formulaire.prix) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formulaire.vue, 'vue')  }}
+                                    {{ form_widget(formulaire.vue , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'vue '}} ) }}
+                                    {{ form_errors(formulaire.vue) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(formulaire.hotel, 'hotel')  }}
+                                    {{ form_widget(formulaire.hotel , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'Nom Hotel '}} ) }}
+                                    {{ form_errors(formulaire.hotel) }}
+                                </div>
+                            </div>
+                            {{ form_end(formulaire) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

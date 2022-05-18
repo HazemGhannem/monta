@@ -1,0 +1,89 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Event index{% endblock %}
+
+{% block body %}
+
+    <h1>Event index</h1>
+    <input id="search" type=text value="" placeholder="type a name">
+    <table class="table table-secondary" style="color: steelblue" border="2">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>NomEvent</th>
+            <th>DateEvent</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody id="body1">
+        {% for event in events %}
+            <tr>
+                <td>{{ event.id }}</td>
+                <td>{{ event.nomEvent }}</td>
+                <td>{{ event.dateEvent ? event.dateEvent|date('Y-m-d') : '' }}</td>
+                <td>{{ event.description }}</td>
+                <td><img  width="300px" src="{{ asset('uploads/image/' ~ event.image) }}   "class=""></td>
+                <td>
+                    <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
+                    <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tbody id="searchBody">
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('event_new') }}">Create new</a>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $("#search").keyup(function () {
+            var value = $("#search").val();
+            if (value === "") {
+                $('#searchBody').hide();
+                $('#body1').show();
+            } else {
+                $('#searchBody').show();
+                $('#body1').hide();
+            }
+            $.ajax({
+                    type: 'GET',
+                    url: 'event/recherche',
+                    data: {
+                        'valeur-recherche': value
+                    },
+                    success: function (retour) {
+                        if (retour) {
+                            $('#searchBody').empty()
+                            $.each(JSON.parse(retour), function (i, obj) {
+
+                                $('#searchBody').append(
+                                    "<tr>" +
+                                    "    <td>" + obj.id + "</td>" +
+                                    "    <td>" + obj.nomEvent + "</td>" +
+                                    "    <td>" + obj.dateEvent + "</td>" +
+                                    "    <td>" + obj.description + "</td>" +
+                                    "    <td></td>" +
+                                    "</tr>"
+                                );
+
+                                console.log("wsel");
+                            });
+                        }
+                    },
+                }
+            );
+        })
+    </script>
+    <div class="mt-5">
+        {{ knp_pagination_render(events, 'pagination.html.twig') }}
+    </div>
+{% endblock %}

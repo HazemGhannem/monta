@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Blogueur{% endblock %}
+
+{% block body %}
+    <h1>Edit Blogueur</h1>
+
+    {{ include('blogueur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('blogueur_index') }}">back to list</a>
+
+    {{ include('blogueur/_delete_form.html.twig') }}
+{% endblock %}

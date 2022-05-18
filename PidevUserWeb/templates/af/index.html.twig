@@ -1,0 +1,62 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <section id="hotels" class="section-with-bg wow fadeInUp">
+
+        <div class="container">
+            <div class="section-header">
+                <h2>Blog</h2>
+                <p>Her are some Articles</p>
+            </div>
+
+            <div class="row">
+
+             {% for a in articles %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="hotel">
+                        <div class="hotel-img">
+
+                            <img style="height: 200px" src="{{ asset('uploads/') ~ a .image }}"/>
+                        </div>
+                        <h3><a href="http://127.0.0.1:8000/a/f/{{ a.id }}">{{ a.title }}</a></h3>
+                        <div class="stars">
+                            {% for r in 1..(a.rating|round(0, 'floor')  )   %}
+                                <i class="fa fa-star"></i>
+                            {% endfor %}
+                            {% if a.rating - a.rating|round(0, 'floor')   !=0 %}
+                                <i class="fa fa-star-half-full"></i>
+                            {% endif %}
+
+                        </div>
+                        <p>Author : {{ a.blogueur.name }}</p>
+                        <p>{{ a.contenu }}</p>
+
+                    </div>
+                </div>
+
+             {% endfor %}
+
+            </div>
+            <div class=" row pagination">
+                {{ knp_pagination_render(articles, '/af/pagination.html.twig') }}
+            </div>
+        </div>
+
+
+
+        <div class=“d-flex justify-content-center”>
+
+
+        </div>
+        
+
+    </section>
+    <script>
+    $(document).ready(function() {
+    $('#example').DataTable( {
+    "pagingType": "full_numbers"
+    } );
+    </script>
+{% endblock %}

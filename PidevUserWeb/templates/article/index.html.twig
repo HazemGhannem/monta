@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <div  class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Opinion
+                        <hr>
+                        <label for="site-search">Rechercher L'ARTICLE:</label>
+
+                        <form action="" method="GET">
+                            <input type="search" id="site-search" name="search"
+                                   aria-label="Search through site content">
+                            <button type="submit">Search</button>
+                        </form>
+
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Image</th>
+                                <th>Contenu</th>
+                                <th>CreationDate</th>
+                                <th>Rating</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+                            {% for article in articles %}
+
+                                <tr>
+                                    <td>{{ article.id }}</td>
+                                    <td>{{ article.title }}</td>
+
+                                    <td>{{ article.contenu }}</td>
+                                    <td><img style="height: 100px" src="{{ asset('uploads/') ~ article .image }}"/></td>
+                                    <td>{{ article.creationDate|date}}</td>
+                                    <td>{{ article.rating }}</td>
+                                    <td>
+                                        <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
+                                        <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">no records found</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a href="{{ path('article_new') }}">Create new</a>
+                <h1>Opinion </h1>
+            </div>
+        </main>
+    </div>
+    <a>  <img   width="30" src="https://cdn-icons-png.flaticon.com/512/337/337946.png">  </a>
+{% endblock %}

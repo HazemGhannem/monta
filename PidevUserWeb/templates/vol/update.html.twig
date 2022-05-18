@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VolController!{% endblock %}
+
+{% block body %}
+
+    <body>
+
+
+    {{ form_start(form) }}
+    <h1>Modifier des vols</h1>
+    {{ form_errors(form.datevolll) }}
+    {{ form_label(form.datevolll,"Date de vol") }}
+    {{ form_widget(form.datevolll) }}
+    {{ form_errors(form.prixvolll) }}
+    {{ form_label(form.prixvolll,"Prix vol") }}
+    {{ form_widget(form.prixvolll) }}
+    {{ form_end(form) }}
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    </body>
+
+
+
+{% endblock %}

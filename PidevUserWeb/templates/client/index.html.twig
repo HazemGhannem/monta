@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client index{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <div  class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Client
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Commentaire</th>
+                                <th>Rating</th>
+                                <th>CreationDate</th>
+                                <th>actions</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            {% for client in clients %}
+                                <tr>
+                                    <td>{{ client.id }}</td>
+                                    <td>{{ client.name }}</td>
+                                    <td>
+                                        <a href="{{ path('client_show', {'id': client.id}) }}">show</a>
+                                        <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a href="{{ path('client_new') }}">Create new</a>
+                <h1>Client index</h1>
+            </div>
+        </main>
+    </div>
+
+
+    <a href="{{ path('client_new') }}">Create new</a>
+{% endblock %}
+

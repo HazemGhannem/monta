@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Opinion index{% endblock %}
+
+{% block body %}
+    <div class="align-content-center p-5 m-5">
+        <main>
+            <div class="container-fluid px-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Opinion
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Commentaire</th>
+                                <th>Rating</th>
+                                <th>CreationDate</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for opinion in opinions %}
+                                <tr>
+                                    <td>{{ opinion.id }}</td>
+                                    <td>{{ opinion.commentaire }}</td>
+                                    <td>{{ opinion.rating }}</td>
+                                    <td>{{ opinion.creationDate ? opinion.creationDate|date('Y-m-d') : '' }}</td>
+                                    <td>
+                                        <a href="{{ path('opinion_show', {'id': opinion.id}) }}">show</a>
+                                        <a href="{{ path('opinion_edit', {'id': opinion.id}) }}">edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a href="{{ path('opinion_new') }}">Create new</a>
+        </main>
+    </div>
+{% endblock %}

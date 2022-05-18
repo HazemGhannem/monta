@@ -1,0 +1,61 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Reclammation {% endblock %}
+
+{% block body %}
+    <h1>Réponses des réclammations</h1>
+    <p style="100px" > <input  id="myInput"  type="text" placeholder="search">
+
+        <table class="table table-bordered" id="t" >
+
+            <thead>
+            <tr>
+                <th>Objet</th>
+                <th>Message</th>
+                <th>Statut</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+
+    <tbody>
+    <tbody id="myTable">
+            {% for reclammation in reclammations %}
+                <tr>
+                    <td>{{ reclammation.objet }}</td>
+                    <td>{{ reclammation.message }}</td>
+                    <td>{{ reclammation.statut }}</td>
+                    <td>
+                        {% if reclammation.getReponse is not null %}
+                            <a href="{{ path('reponse_showClient', {'id': reclammation.getReponse.id}) }}">Afficher
+                                reponse</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Pas de réclammation</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </tbody>
+            <tbody id="search">
+            </tbody>
+        </table>
+
+
+
+    <!--<a href="{{ path('reclammation_new') }}">Create new</a>-->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{% endblock %}

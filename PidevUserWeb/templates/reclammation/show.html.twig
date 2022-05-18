@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reclammation{% endblock %}
+
+{% block body %}
+
+    <h1>Reclammation</h1>
+
+    <table class="table">
+
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reclammation.id }}</td>
+            </tr>
+            <tr>
+                <th>Objet</th>
+                <td>{{ reclammation.objet }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ reclammation.message }}</td>
+            </tr>
+            <tr>
+                <th>Client_id</th>
+                <td>{{ reclammation.clientId }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ reclammation.statut }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('reclammation_index') }}">back to list</a>
+
+    <a href="{{ path('reclammation_edit', {'id': reclammation.id}) }}">edit</a>
+
+    {{ include('reclammation/_delete_form.html.twig') }}
+
+
+
+{% endblock %}

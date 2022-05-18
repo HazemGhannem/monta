@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VolController!{% endblock %}
+
+{% block body %}
+
+    <body>
+    {{ form_start(form) }}
+    <h1>Modifier les destinations</h1>
+    {{ form_errors(form.ville_dep) }}
+    {{ form_label(form.ville_dep,"Ville depart") }}
+    {{ form_widget(form.ville_dep) }}
+    {{ form_errors(form.ville_arr) }}
+    {{ form_label(form.ville_arr,"Ville arrivée") }}
+    {{ form_widget(form.ville_arr) }}
+    {{ form_end(form) }}
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+    </body>
+    </body>
+
+
+
+{% endblock %}

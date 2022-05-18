@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Signalement{% endblock %}
+
+{% block body %}
+    <div class="align-content-center m-5 p-5">
+        <h1>Signalement</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <td><b>Blogueur</b></td>
+                <td><b>Description</b></td>
+                <td><b>Blogueur signalé</b></td>
+                <td><b>Description de l'opinion signalé</b></td>
+                <td><b>Actions</b></td>
+            </tr>
+            <tr>
+                <td>{{ signalement.blogueur.name }}</td>
+                <td>{{ signalement.description }}</td>
+                <td>{{ signalement.opinion.client.name }}</td>
+                <td>{{ signalement.opinion.commentaire }}</td>
+                <td>
+                    <a href="{{ path('opinion_show', {'id': signalement.opinion.id}) }}">Afficher l'opinion</a>
+                    &nbsp|&nbsp
+                    <a href="{{ path('signalement_delete', {'id': signalement.id}) }}">Ignorer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('signalement_index') }}">Back to list</a>
+    </div>
+{% endblock %}

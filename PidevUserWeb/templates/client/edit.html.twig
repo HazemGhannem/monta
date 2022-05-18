@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Client{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header"><h3 class="text-center font-weight-light my-4">Edit Account</h3></div>
+                        <div class="card-body">
+    {{ include('client/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('client_index') }}">back to list</a>
+
+    {{ include('client/_delete_form.html.twig') }}
+    </div>
+    <div class="card-footer text-center py-3">
+        <div class="small"><a href="{{ path('client_index') }}">back to list</a></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </main>
+{% endblock %}

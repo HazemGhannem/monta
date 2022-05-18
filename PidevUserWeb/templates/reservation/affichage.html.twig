@@ -1,0 +1,49 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Hello VolController!{% endblock %}
+
+{% block body %}
+    <h1> La liste des réservations</h1>
+    <style>
+        table{
+            border:solid 1px #aaa999;
+        }
+        table tr th{
+            border:solid 1px #aaa999;
+            padding:6px 11px;
+        }
+        table tr td{
+            border:solid 1px #aaa999;
+            padding:6px 11px;
+        }
+    </style>
+    <table style="border:solid 1px #aaa999;">
+
+        <tr><th>Id reservation</th>
+
+            <th>Nom</th>
+
+            <th>Prénom</th>
+
+
+
+
+
+
+        </tr>
+        {% for c in vol %}
+            <tr>
+                <td>{{ c.id }}</td>
+
+                <td>{{ c.nom}}</td>
+                <td>{{ c.prenom}}</td>
+
+
+
+            </tr>
+
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

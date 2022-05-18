@@ -1,0 +1,28 @@
+{% extends 'front.html.twig' %}
+{% block title %}Profil de {{ app.user.firstname }} {{ app.user.name }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+        {% for message in app.flashes('message') %}
+            <div class="col-xs4">
+                <div class="p-3 my-2 rounded-2 success">{{message}}</div>
+            </div>
+        {% endfor %}
+
+    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+        <div class="card p-4">
+            <div class=" image d-flex flex-column justify-content-center align-items-center"> <span><img src="{{ asset('uploads/')}}{{ app.user.image }}" class="img-responsive listing-box-img" alt=""/></span>
+                <span class="name mt-3">Prénom:{{ app.user.prenom }}</span> <span class="idd">Nom:{{ app.user.nom }}</span>
+                <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">Email:{{ app.user.email }}</span> <span><i class="fa fa-copy"></i></span> </div>
+                <div class="d-flex flex-row justify-content-center align-items-center gap-3">  <span class="follow">Sexe:{{ app.user.sexe }}</span></div>
+                <div class="d-flex flex-row justify-content-center align-items-center gap-3">  <span class="follow">Cin:{{ app.user.cin }}</span></div>
+
+                <div class=" d-flex mt-2"> <button class="btn1 btn-dark"> <a href="{{ path('client_profil_modifier') }}" class="text-white">Modifier le profil</a>
+                    </button> </div>
+                <div class="text mt-3"> <span><br><br>  </span> </div>
+                <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Hello VolController!{% endblock %}
+
+{% block body %}
+
+    <body>
+
+    {{ form_start(form) }}
+    <h1>Réserver un vol</h1>
+    {{ form_errors(form.nom) }}
+    {{ form_label(form.nom,"Votre nom") }}
+    {{ form_widget(form.nom) }}
+    {{ form_errors(form.prenom) }}
+    {{ form_label(form.prenom,"Votre prénom") }}
+    {{ form_widget(form.prenom) }}
+    {{ form_end(form) }}
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+
+    </body>
+
+
+
+{% endblock %}

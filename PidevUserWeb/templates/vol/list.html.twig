@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VolController!{% endblock %}
+
+{% block body %}
+    <h1> La liste des vols</h1>
+    <style>
+        table{
+            border:solid 1px #aaa999;
+        }
+        table tr th{
+            border:solid 1px #aaa999;
+            padding:6px 11px;
+        }
+        table tr td{
+            border:solid 1px #aaa999;
+            padding:6px 11px;
+        }
+    </style>
+    <table style="border:solid 1px #aaa999;">
+
+    <tr><th>ID vol</th>
+
+        <th>Date vol</th>
+
+        <th>Prix vol</th>
+
+        <th>Id Destination</th>
+
+        <th>Editer</th>
+
+
+    </tr>
+        {% for c in vol %}
+    <tr>
+        <td>{{ c.id }}</td>
+
+        <td>{{ c.Datevolll|date}}</td>
+        <td>{{ c.prixvolll }}</td>
+        <td>{{ c.destination.id}}</td>
+
+        <td><a href="{{ path('update',{'id':c.id}) }}">Modifier</a>
+            <a href="{{ path('delete',{'id':c.id}) }}">Supprimer</a>
+        <a href="{{ path('pdf',{'id':c.id}) }}"><img width="30" src="https://cdn-icons-png.flaticon.com/512/337/337946.png"></a></td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+    <a href="{{ path('addv') }}">Ajouter vol</a>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'front.html.twig' %}
+ {% block title %}
+     <h1> Liste des Reservations </h1>
+ {% endblock %}
+
+ {% block body %}
+     <table border="1">
+         <tr>
+             <th scope="row">ID</th>
+             <th scope="row">Prenom</th>
+             <th scope="row">Nom</th>
+             <th scope="row">Ville Depart</th>
+             <th scope="row">Ville Arrivé</th>
+             <th scope="row">Date</th>
+             <th scope="row">Prix</th>
+
+         </tr>
+         <div style="margin-left:50px;"> <a class="btn-dark" href="{{path('newreservation')}}"> Ajouter une nouvelle Reservation </a>
+         </div>
+
+         <tr>
+
+             {% for resvol in resvol %}
+
+             <td>
+                 {{ resvol.id }}
+             </td>
+             <td>
+                 {{ resvol.prenom }}
+             </td>
+             <td>
+                 {{ resvol.nom }}
+             </td>
+             <td>
+                 {{ resvol.villedep }}
+             </td>
+             <td>
+                 {{ resvol.villearr }}
+             </td>
+             <td>
+                 {{ resvol.getDatevoll()|date('d-m-Y H:i:s') }}
+             </td>
+
+             <td>
+                 {{ resvol.prixvol }}
+             </td>
+
+
+             <td>
+                 <a class="btn-primary" href="{{ path('deletereservation', {'id': resvol.id }) }}"> supprimer </a>
+                 <a class=" btn-info" href="{{ path('updatereservation', {'id': resvol.id    }) }}"> modifier </a>
+
+             </td>
+         </tr>
+         {% endfor %}
+     </table>
+     <a class="btn-light" href="{{path('pdf2')}}"> Create PDF </a>
+ {% endblock %}

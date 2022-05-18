@@ -1,0 +1,63 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Votre WishList{% endblock %}
+
+{% block body %}
+    <section class="bg-light p-3">
+        <h1>Votre WishList</h1>
+    </section>
+    <a class="nav-link scrollto" href={{ path('lis') }}>Retour</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date vol</th>
+
+            <th>Prix vol</th>
+            <th>Ville depart</th>
+            <th>Ville arrivée</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for element in dataWishlist %}
+            <tr>
+
+                <td>
+                    {{ element.vol.id }}
+                </td>
+                <td>
+                    {{ element.vol.datevolll|date}}
+                </td>
+                <td>
+                    {{ element.vol.prixvolll }}
+                </td>
+                <td>
+                    {{ element.vol.destination.villedep }}
+                </td>
+                <td>
+                    {{ element.vol.destination.villearr }}
+                </td>
+                <td>
+                    <a href="{{path("supp", {id: element.vol.id})}}" class="btn btn-danger">
+                        Supprimer <i class=""></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center">Votre panier est vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3">Total</td>
+            <td>
+
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+
+{% endblock %}

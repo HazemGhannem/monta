@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blogueur index{% endblock %}
+
+{% block body %}
+    <div class="p-5 m-5 align-content-center">
+        <h1>Blogueur index</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Bloqué</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for blogueur in blogueurs %}
+                <tr>
+                    <td>{{ blogueur.id }}</td>
+                    <td>{{ blogueur.name }}</td>
+                    {% if blogueur.isBlocked %}
+                        <td>Oui</td>
+                    {% else %}
+                        <td>Non</td>
+                    {% endif %}
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('blogueur_show', {'id': blogueur.id}) }}">show</a>
+                        <a class="btn btn-primary" href="{{ path('blogueur_edit', {'id': blogueur.id}) }}">edit</a>
+                        <a class="btn btn-danger" href="{{ path('blogueur_block', {'id': blogueur.id}) }}">block</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('blogueur_new') }}">Create new</a>
+    </div>
+{% endblock %}

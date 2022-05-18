@@ -1,0 +1,40 @@
+<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            <i class="fas fa-bell"></i>
+            {% if signalements|length > 0 %}
+                <span class="badge badge-danger">{{ signalements|length }}</span>
+            {% endif %}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdown">
+            {% if signalements|length > 0 %}
+                <p class="pt-3 text-center">
+                    <b>Signalements</b>
+                </p>
+                {% for signalement in signalements %}
+                    <li class="border-top py-1">
+                        <a class="dropdown-item" href="{{ path('signalement_show', {'id': signalement.id}) }}">
+                            <p><b>Auteur :</b> {{ signalement.blogueur.name }}</p>
+                            <p><b>Opinion signalé :</b> {{ signalement.blogueur.name }}</p>
+                            <b>Description :</b>
+                            <p> {{ signalement.description }}</p>
+                        </a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p class="d-flex align-items-center">
+                    Aucun signalement
+                </p>
+            {% endif %}
+            <li>
+                <hr class="dropdown-divider"/>
+            </li>
+            <li>
+                <a class="dropdown-item text-center text-primary pb-3" href="{{ path('signalement_index') }}">
+                    Show all
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

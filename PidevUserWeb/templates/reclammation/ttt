@@ -1,0 +1,36 @@
+ " <tr>"
+ "
+ "                <td>{{ reclammation.objet }}</td>"
+ "               <td>{{ reclammation.message }}</td>"
+ "               <td>{{ reclammation.statut }}</td>
+ "           </tr>
+
+
+
+ "<table class='table'>"+
+ "        <thead>"+
+ "            <tr>"+
+ "                <th>Objet</th>"+
+ "                <th>Message</th>"+
+ "                <th>Statut</th>"+
+ "                <th>actions</th>"+
+ "            </tr>"+
+ "        </thead>"+
+ "        <tbody>"+
+ "            <tr>"+
+ "                <td>"+obj.objet +"</td>"+
+ "                <td>"+ obj.message+"</td>"+
+ "                <td>"+obj.statut+"</td>"+
+ "            </tr>"+
+ "            <tr>"+
+ "            </tr>"+
+  "               <td>"+
+  "                   <a href='{{ path('reponse_showClient', {'id': reclammation.getReponse.id}) }}''>Afficher reponse</a>"+
+"                 </td>"+
+  "           </tr>"+
+"             <tr>"+
+  "               <td colspan="7">Pas de réclammation</td>"+
+  "           </tr>"+
+
+   "      </tbody>"+
+   "  </table>"

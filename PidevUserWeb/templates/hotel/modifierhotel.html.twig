@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Modifier un Hotel</h1>
+
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div >
+                    <div class="row">
+                        <div class="col-xl-6 align-content-center" >
+                            <br><br>
+                            <div class="form-group">
+                                {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                                <div class="form-group">
+                                    {{ form_widget(form.nom  , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'nom'}} ) }}
+                                    {{ form_errors(form.nom ) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.nbChambre, {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'nombres de chambres'}} ) }}
+                                    {{ form_errors(form.nbChambre ) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.ville , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'ville'}} ) }}
+                                    {{ form_errors(form.ville) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.imghotel , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'image Hotel'}} ) }}
+                                    {{ form_errors(form.imghotel) }}
+                                </div>
+
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

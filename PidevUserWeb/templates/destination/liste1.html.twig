@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DestinationController!{% endblock %}
+
+{% block body %}
+    <h1> La liste des destinations</h1>
+    <style>
+        table{
+            border:solid 1px #aaa999;
+        }
+        table tr th{
+            border:solid 1px #aaa999;
+            padding:6px 11px;
+        }
+        table tr td{
+            border:solid 1px #aaa999;
+            padding:6px 11px;
+        }
+    </style>
+    <table style="border:solid 1px #aaa999;">
+
+        <tr>
+            <th>ID </th>
+            <th>Ville arrivé</th>
+            <th>Ville depart</th>
+
+
+            <th>Editer</th>
+
+
+        </tr>
+        {% for c in destination %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td>{{ c.villearr }}</td>
+                <td>{{ c.villedep }}</td>
+
+
+                <td><a href="{{ path('update1',{'id':c.id}) }}">Modifier</a>
+                    <a href="{{ path('delete1',{'id':c.id}) }}">Supprimer</a></td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+    <a href="{{ path('addDest') }}">Ajouter destination</a>
+{% endblock %}
